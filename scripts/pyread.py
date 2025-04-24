@@ -13,6 +13,9 @@ import trimesh
 
 
 class Pyread:
+    """
+        A universal python files reader.
+    """
     def __init__(self, file_path):
         self.file_path = file_path
 
