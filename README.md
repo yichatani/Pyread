@@ -14,5 +14,6 @@ Try to solve **'can't open it'** when facing `.npz`  `.npy`  `.hdf5` `.json` ...
 - `.csv` — Structured tabular data  
 - `.pkl` / `.pickle` — Serialized Python objects  
 - `.zarr` — Chunked and compressed multi-dimensional arrays  
-- `.pcd` — Placeholder for point cloud files *(recommended to use Open3D for full support)*  
+- `.pcd` — Placeholder for point cloud files *(recommended to use Open3D for full support)*
+- `.ckpt` — Training checkpoint files  
 
