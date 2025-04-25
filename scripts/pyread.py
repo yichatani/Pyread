@@ -1,16 +1,11 @@
 import os
-import h5py
 import json
 import yaml
-import zarr
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
-import cv2
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D
-import trimesh
-
 
 class Pyread:
     """
@@ -43,11 +38,14 @@ class Pyread:
             self.read_csv()
         elif ext == ".zarr":
             self.read_zarr_structure()
+        elif ext == ".ckpt":
+            self.read_ckpt()
         else:
             print("Unsupported file type.")
 
     def read_obj(self):
         try:
+            import trimesh
             mesh = trimesh.load(self.file_path)
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
@@ -65,6 +63,7 @@ class Pyread:
 
     def read_hdf5_structure(self):
         try:
+            import h5py
             with h5py.File(self.file_path, 'r') as f:
                 def print_hdf5_structure(name, obj):
                     print(name)
@@ -74,6 +73,7 @@ class Pyread:
 
     def read_hdf5_values(self, key):
         try:
+            import h5py
             with h5py.File(self.file_path, 'r') as f:
                 dset = f[key]
                 print("Dataset shape:", dset.shape)
@@ -156,11 +156,23 @@ class Pyread:
 
     def read_zarr_structure(self):
         try:
+            import zarr
             z = zarr.open(self.file_path, mode='r')
             print("Zarr structure:")
             print(z.tree())
         except Exception as e:
             print(f"Error reading .zarr structure: {e}")
+    
+    def read_ckpt(self):
+        try:
+            import torch
+            from pprint import pprint
+            ckpt = torch.load(self.file_path, map_location="cpu")
+            print("Top-level keys:", ckpt.keys())
+            cfg = ckpt["cfg"]
+            pprint(cfg)
+        except Exception as e:
+            print(f"Error reading .ckpt: {e}")
 
 if __name__ == "__main__":
     reader = Pyread("/path/to/your/file")
