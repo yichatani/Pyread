@@ -17,3 +17,10 @@ Try to solve **'can't open it'** when facing `.npz`  `.npy`  `.hdf5` `.json` ...
 - `.pcd` — Placeholder for point cloud files *(recommended to use Open3D for full support)*
 - `.ckpt` — Training checkpoint files  
 
+## Point cloud visualizer
+
+```bash
+pip install kaleido plotly
+cd visualizer
+python setup.py install
+```

@@ -1,0 +1,4 @@
+__pycache__/
+visualizer/*
+!visualizer/visualizer
+!visualizer/setup.py
