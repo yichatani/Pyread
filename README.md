@@ -3,7 +3,12 @@
 
 ## Preview
 
-Try to solve **'can't open it'** when facing `.npz`  `.npy`  `.hdf5` `.json` ...
+Try to solve **'can't open it'** when facing `.npz`  `.npy`  `.hdf5` `.pcd` `.ckpt` ... with just 2 lines:
+
+```python
+pyread = Pyread(file_path)
+pyread.read()
+```
 
 ✅ **Fully Integrated**: The `Pyread` class supports reading and visualizing a wide range of commonly used scientific data formats:
 
