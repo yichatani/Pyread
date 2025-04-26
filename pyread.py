@@ -5,7 +5,9 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import open3d as o3d
 from mpl_toolkits.mplot3d import Axes3D
+
 
 class Pyread:
     """
@@ -136,7 +138,20 @@ class Pyread:
             print(f"Error reading .bin file: {e}")
 
     def read_pcd(self):
-        print("PCD reader not implemented. You can use open3d or pypcd.")
+        try:
+            from visualizer.pointcloud import visualize_pointcloud
+            pcd = o3d.io.read_point_cloud(self.file_path)
+            points = np.asarray(pcd.points)  # (N, 3)
+            if pcd.has_colors():
+                colors = np.asarray(pcd.colors)  # (N, 3)
+                point_cloud = np.concatenate([points, colors], axis=1)  # (N, 6)
+                visualize_pointcloud(points,colors)
+            else:
+                point_cloud = points  # (N, 3)
+                visualize_pointcloud(points)
+        except Exception as e:
+            print(f"Error reading .pcd file: {e}")
+        return point_cloud
 
     def read_pickle(self):
         try:
